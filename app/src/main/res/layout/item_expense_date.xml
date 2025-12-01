@@ -21,7 +21,7 @@
             android:id="@+id/categoryColorView"
             android:layout_width="4dp"
             android:layout_height="match_parent"
-            android:background="#6200EE"
+            android:background="@color/color_budget_primary"
             android:layout_marginEnd="12dp" />
 
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textColor="@color/color_dark_text" />
 
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#757575"
+                android:textColor="@color/color_muted"
                 android:layout_marginTop="4dp"
                 android:visibility="gone" />
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#D32F2F" />
+                android:textColor="@color/color_expense_error" />
 
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/color_gray_9e"
                 android:layout_marginTop="4dp" />
 
 

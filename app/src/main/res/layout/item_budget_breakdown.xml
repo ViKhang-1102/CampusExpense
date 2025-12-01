@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/category_name"
-            android:textColor="#7C3AED"
+            android:textColor="@color/color_purple_variant"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -26,8 +26,8 @@
             android:id="@+id/tvPercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0%"
-            android:textColor="#7C3AED"
+            android:text="@string/default_percentage_value"
+            android:textColor="@color/color_purple_variant"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -40,12 +40,13 @@
         android:layout_marginBottom="8dp"
         android:max="100"
         android:progress="0"
-        android:progressTint="#7C3AED" />
+        android:progressTint="@color/color_purple_variant" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false"> <!-- ĐÃ SỬA: Thêm android:baselineAligned="false" cho LinearLayout này -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,4 +82,3 @@
     </LinearLayout>
 
 </LinearLayout>
-

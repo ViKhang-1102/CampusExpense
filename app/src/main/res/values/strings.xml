@@ -93,6 +93,7 @@
     <string name="expense_updated">Expense updated successfully</string>
     <string name="expense_deleted">Expense deleted successfully</string>
     <string name="select_date">Select Date</string>
+    <string name="default_percentage_value">0%</string>
 
     <string name="greeting">Welcome, %1$s</string>  <!-- Dynamic: Welcome, Khang -->
     <string name="total_spent_title">Total spent this month</string>

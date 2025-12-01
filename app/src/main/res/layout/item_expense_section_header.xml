@@ -7,5 +7,5 @@
     android:paddingBottom="8dp"
     android:textSize="14sp"
     android:textStyle="bold"
-    android:textColor="#757575"
-    android:background="#F5F5F5" />
+    android:textColor="@color/color_muted"
+    android:background="@color/color_surface_light" />
