@@ -29,15 +29,15 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textColor="@color/color_dark_text" />
 
             <TextView
                 android:id="@+id/periodText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#757575"
-                android:background="#E0E0E0"
+                android:textColor="@color/color_muted"
+                android:background="@color/color_gray_e0"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:layout_marginEnd="8dp" />
@@ -49,7 +49,7 @@
                 android:src="@android:drawable/ic_menu_edit"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/edit"
-                app:tint="#6200EE"
+                app:tint="@color/color_budget_primary"
                 android:layout_marginEnd="8dp" />
 
             <ImageButton
@@ -59,7 +59,7 @@
                 android:src="@android:drawable/ic_menu_delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/delete"
-                app:tint="#D32F2F" />
+                app:tint="@color/color_expense_error" />
 
         </LinearLayout>
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/budget_label"
                 android:textSize="14sp"
-                android:textColor="#757575" />
+                android:textColor="@color/color_muted" />
 
             <TextView
                 android:id="@+id/amountText"
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textColor="@color/color_dark_text" />
 
         </LinearLayout>
 
@@ -94,8 +94,8 @@
             android:layout_height="8dp"
             android:max="100"
             android:progress="0"
-            android:progressTint="#4CAF50"
-            android:progressBackgroundTint="#E0E0E0" />
+            android:progressTint="@color/color_success_legacy"
+            android:progressBackgroundTint="@color/color_gray_e0" />
 
         <TextView
             android:id="@+id/progressText"
@@ -104,7 +104,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:textColor="#757575" />
+            android:textColor="@color/color_muted" />
 
     </LinearLayout>
 

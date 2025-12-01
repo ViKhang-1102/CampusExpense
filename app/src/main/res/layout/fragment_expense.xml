@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/color_surface_light">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -23,52 +23,53 @@
                 android:text="@string/expense_management"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
+                android:textColor="@color/color_dark_text"
                 android:layout_marginBottom="8dp" />
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginBottom="20dp"-->
 <!--                android:gravity="center_vertical"-->
-<!--                android:layout_marginBottom="16dp">-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="12">-->
 
 <!--                <Spinner-->
 <!--                    android:id="@+id/monthSpinner"-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_marginEnd="8dp" />-->
+<!--                    android:layout_marginEnd="4dp"-->
+<!--                    android:layout_weight="5" />-->
 
 <!--                <Spinner-->
 <!--                    android:id="@+id/categoryFilterSpinner"-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_marginStart="8dp" />-->
+<!--                    android:layout_marginStart="4dp"-->
+<!--                    android:layout_weight="7" />-->
 <!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:weightSum="12">
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
                 <Spinner
                     android:id="@+id/monthSpinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="5" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp" />
 
                 <Spinner
                     android:id="@+id/categoryFilterSpinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="7" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp" />
+
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -77,7 +78,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#F5F5F5">
+                app:cardBackgroundColor="@color/color_surface_light">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/total_expense"
                             android:textSize="12sp"
-                            android:textColor="#757575" />
+                            android:textColor="@color/color_muted" />
 
                         <TextView
                             android:id="@+id/totalExpenseText"
@@ -105,7 +106,7 @@
                             android:text="@string/total_spent_value"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#D32F2F"
+                            android:textColor="@color/color_expense_error"
                             android:layout_marginTop="4dp" />
 
                     </LinearLayout>
@@ -122,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/transaction_count"
                             android:textSize="12sp"
-                            android:textColor="#757575" />
+                            android:textColor="@color/color_muted" />
 
                         <TextView
                             android:id="@+id/expenseCountText"
@@ -131,7 +132,7 @@
                             android:text="0"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#212121"
+                            android:textColor="@color/color_dark_text"
                             android:layout_marginTop="4dp" />
 
                     </LinearLayout>
@@ -176,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no_expenses"
                 android:textSize="16sp"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/color_gray_9e"
                 android:gravity="center"
                 android:padding="48dp"
                 android:visibility="gone" />
@@ -192,7 +193,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
-        app:tint="#FFFFFF"
-        app:backgroundTint="#6200EE" />
+        app:tint="@color/white"
+        app:backgroundTint="@color/color_budget_primary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

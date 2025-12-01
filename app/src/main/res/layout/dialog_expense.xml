@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/category"
         android:textSize="14sp"
-        android:textColor="#6200EE"
+        android:textColor="@color/color_budget_primary"
         android:layout_marginBottom="8dp" />
 
     <Spinner
@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amount"
-        app:hintTextColor="#6200EE"
-        app:boxStrokeColor="#6200EE"
+        app:hintTextColor="@color/color_budget_primary"
+        app:boxStrokeColor="@color/color_budget_primary"
         android:layout_marginBottom="16dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -43,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/description"
-        app:hintTextColor="#6200EE"
-        app:boxStrokeColor="#6200EE"
+        app:hintTextColor="@color/color_budget_primary"
+        app:boxStrokeColor="@color/color_budget_primary"
         android:layout_marginBottom="16dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:text="@string/date"
         android:textSize="14sp"
-        android:textColor="#6200EE"
+        android:textColor="@color/color_budget_primary"
         android:layout_marginBottom="8dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -70,8 +70,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_date"
-        android:textColor="#212121"
-        app:backgroundTint="#E0E0E0"
+        android:textColor="@color/color_dark_text"
+        app:backgroundTint="@color/color_gray_e0"
         android:layout_marginBottom="24dp"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:textColor="#757575"
+            android:textColor="@color/color_muted"
             app:backgroundTint="@android:color/transparent"
             android:layout_marginEnd="8dp"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            app:backgroundTint="#6200EE" />
+            app:backgroundTint="@color/color_budget_primary" />
 
     </LinearLayout>
 

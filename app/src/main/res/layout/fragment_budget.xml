@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/color_surface_light">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:text="@string/budget_management"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
+                android:textColor="@color/color_dark_text"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/budget_subtitle"
                 android:textSize="14sp"
-                android:textColor="#757575"
+                android:textColor="@color/color_muted"
                 android:layout_marginBottom="24dp" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no_budget"
                 android:textSize="16sp"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/color_gray_9e"
                 android:gravity="center"
                 android:padding="48dp"
                 android:visibility="gone" />
@@ -62,7 +62,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
-        app:tint="#FFFFFF"
-        app:backgroundTint="#6200EE" />
+        app:tint="@color/white"
+        app:backgroundTint="@color/color_budget_primary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
