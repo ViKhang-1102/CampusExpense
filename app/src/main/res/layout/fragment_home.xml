@@ -31,7 +31,7 @@
                 android:padding="20dp"
                 android:text="@string/greeting"
                 android:textColor="#7C3AED"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
@@ -40,6 +40,7 @@
             android:id="@+id/cardTotalSpent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             app:cardBackgroundColor="#E8DAEF"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
@@ -50,7 +51,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -66,56 +66,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:ellipsize="none"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:text="@string/total_spent_value"
                     android:textColor="#7C3AED"
                     android:textSize="32sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Budget Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardBudget"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardTotalSpent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/tvBudget"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:ellipsize="none"
-                    android:gravity="center"
                     android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="0 ₫"
-                    android:textColor="#7C3AED"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/budget"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12sp" />
+                    android:singleLine="true" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -124,19 +81,18 @@
             android:id="@+id/layoutStats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
             android:orientation="horizontal"
-            android:weightSum="2"
+            android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardBudget">
+            app:layout_constraintTop_toBottomOf="@id/cardTotalSpent">
 
             <!-- Transaction Count Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:layout_marginEnd="4dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
@@ -155,17 +111,16 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="#7C3AED"
-                        android:textSize="18sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:gravity="center"
+                        android:layout_marginTop="4dp"
                         android:text="@string/transactions_title"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -174,7 +129,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2" android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
@@ -191,20 +147,60 @@
                         android:id="@+id/tvAvgPerDay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/total_spent_value"
+                        android:textColor="#7C3AED"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:ellipsize="none"
-                        android:gravity="center"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="0 ₫"
-                        android:textColor="#7C3AED"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:gravity="center" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/avg_per_day"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Budget Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvBudget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_spent_value"
+                        android:textColor="#7C3AED"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:ellipsize="none"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/budget"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -228,18 +224,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
                     android:text="@string/breakdown_title"
                     android:textColor="#7C3AED"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewBreakdown"
@@ -254,7 +249,6 @@
             android:id="@+id/cardSummary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
@@ -265,25 +259,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:text="@string/summary_title"
                     android:textColor="#7C3AED"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
 
                 <!-- Total Budget -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -297,21 +290,21 @@
                         android:id="@+id/tvTotalBudget"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ellipsize="none"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="0 ₫"
+                        android:text="@string/total_spent_value"
                         android:textColor="#7C3AED"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:ellipsize="none"
+                        android:maxLines="1"
+                        android:singleLine="true" />
                 </LinearLayout>
 
                 <!-- Spent -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -325,13 +318,13 @@
                         android:id="@+id/tvSpent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ellipsize="none"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="0 ₫"
+                        android:text="@string/total_spent_value"
                         android:textColor="#7C3AED"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:ellipsize="none"
+                        android:maxLines="1"
+                        android:singleLine="true" />
                 </LinearLayout>
 
                 <!-- Remaining -->
@@ -352,13 +345,13 @@
                         android:id="@+id/tvRemaining"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ellipsize="none"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="0 ₫"
+                        android:text="@string/total_spent_value"
                         android:textColor="#7C3AED"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:ellipsize="none"
+                        android:maxLines="1"
+                        android:singleLine="true" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

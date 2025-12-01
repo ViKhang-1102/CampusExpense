@@ -103,14 +103,14 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         btnRegister.setEnabled(false);
-        btnRegister.setText("Registering...");
+        btnRegister.setText(R.string.registering);
 
         new Thread(() -> {
             int count = userDao.checkUsernameExists(username);
             if (count > 0) {
                 runOnUiThread(() -> {
                     btnRegister.setEnabled(true);
-                    btnRegister.setText("Register");
+                    btnRegister.setText(R.string.register);
                     usernameLayout.setError(getString(R.string.error_username_exists));
                 });
                 return;
@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 btnRegister.setEnabled(true);
-                btnRegister.setText("Register");
+                btnRegister.setText(R.string.register);
                 if (result > 0) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
                     finish();

@@ -29,7 +29,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/adlam_display"
             android:gravity="center"
-            android:text="Wellcome to Campus Expense"
+            android:text="@string/login_title"
             android:textSize="30dp" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="Login to manage your expense"
+            android:text="@string/login_subtitle"
             android:textSize="14dp" />
 
         <androidx.cardview.widget.CardView
@@ -67,7 +67,7 @@
                         android:id="@+id/usernameInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="user name" />
+                        android:hint="@string/username" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +84,7 @@
                         android:id="@+id/passwordInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="password"
+                        android:hint="@string/password"
                         android:inputType="textPassword"
                         android:textColorHint="@color/primary" />
 
@@ -97,7 +97,7 @@
                     android:layout_margin="20dp"
                     android:backgroundTint="@color/design_default_color_primary"
                     android:padding="20dp"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textColorLink="@color/primary" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -115,7 +115,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="Don't have account?" />
+                android:text="@string/dont_have_account" />
 
             <TextView
                 android:id="@+id/registerText"
@@ -124,7 +124,7 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:fontFamily="@font/adlam_display"
-                android:text="Sign up"
+                android:text="@string/sign_up_here"
                 android:textColor="@color/primary"
                 android:textColorHint="@color/primary" />
         </LinearLayout>

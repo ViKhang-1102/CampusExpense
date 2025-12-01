@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         btnLogin.setEnabled(false);
-        btnLogin.setText("Logging in...");
+        btnLogin.setText(R.string.logging_in);
 
         new Thread(() -> {
             String hashedPassword = hashPassword(password);

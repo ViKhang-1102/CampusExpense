@@ -41,11 +41,13 @@ public class BudgetBreakdownAdapter extends RecyclerView.Adapter<BudgetBreakdown
         ExpenseRepository.BudgetBreakdownItem item = breakdownList.get(position);
         
         holder.tvCategoryName.setText(item.categoryName);
-        holder.tvPercentage.setText(item.percentage + "%");
+        String percentText = holder.itemView.getContext().getString(R.string.percentage_format, item.percentage);
+        holder.tvPercentage.setText(percentText);
         holder.progressBar.setProgress(Math.min(item.percentage, 100));
         
-        holder.tvSpent.setText(currencyFormat.format(item.spentAmount) + " ₫");
-        holder.tvBudget.setText(currencyFormat.format(item.budgetAmount) + " ₫");
+        String currencySymbol = holder.itemView.getContext().getString(R.string.currency_symbol);
+        holder.tvSpent.setText(currencyFormat.format(item.spentAmount) + " " + currencySymbol);
+        holder.tvBudget.setText(currencyFormat.format(item.budgetAmount) + " " + currencySymbol);
     }
 
     @Override

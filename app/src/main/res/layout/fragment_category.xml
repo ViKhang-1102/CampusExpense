@@ -38,7 +38,7 @@
                 android:id="@+id/emptyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No categories yet. Tap + to add one."
+                android:text="@string/no_categories_placeholder"
                 android:textSize="16sp"
                 android:textColor="@color/text_secondary"
                 android:gravity="center"

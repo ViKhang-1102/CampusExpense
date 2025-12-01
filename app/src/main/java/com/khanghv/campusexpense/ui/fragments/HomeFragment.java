@@ -108,7 +108,8 @@ public class HomeFragment extends Fragment {
         repository.getTotalSpentForMonth(monthYear, userId).observe(getViewLifecycleOwner(), totalSpent -> {
             if (totalSpent == null) totalSpent = 0.0;
             totalSpentValue[0] = totalSpent;
-            String formatted = currencyFormat.format(totalSpent) + " ₫";
+            String currencySymbol = getString(R.string.currency_symbol);
+            String formatted = currencyFormat.format(totalSpent) + " " + currencySymbol;
             tvTotalSpent.setText(formatted);
             tvSpent.setText(formatted);
             // Cập nhật với budget hiện tại
@@ -128,7 +129,8 @@ public class HomeFragment extends Fragment {
                 totalBudget = 0.0;
             }
             budgetValue[0] = totalBudget;
-            String formatted = currencyFormat.format(totalBudget) + " ₫";
+            String currencySymbol = getString(R.string.currency_symbol);
+            String formatted = currencyFormat.format(totalBudget) + " " + currencySymbol;
             tvBudget.setText(formatted);
             tvTotalBudget.setText(formatted);
             // Cập nhật với spent hiện tại
@@ -145,7 +147,8 @@ public class HomeFragment extends Fragment {
 
     private void updateSummaryAndBreakdown(double budget, double spent) {
         double remaining = budget - spent;
-        String remainingText = (remaining < 0 ? "-" : "") + currencyFormat.format(Math.abs(remaining)) + " ₫";
+        String currencySymbol = getString(R.string.currency_symbol);
+        String remainingText = (remaining < 0 ? "-" : "") + currencyFormat.format(Math.abs(remaining)) + " " + currencySymbol;
         tvRemaining.setText(remainingText);
 
         int colorRes = remaining < 0 ? android.R.color.holo_red_dark : android.R.color.holo_green_dark;
@@ -156,7 +159,8 @@ public class HomeFragment extends Fragment {
         int daysInMonth = getDaysInMonth(currentMonthYear);
         if (daysInMonth > 0) {
             double avgDaily = totalSpent / daysInMonth;
-            tvAvgPerDay.setText(currencyFormat.format(avgDaily) + " ₫");
+            String currencySymbol = getString(R.string.currency_symbol);
+            tvAvgPerDay.setText(currencyFormat.format(avgDaily) + " " + currencySymbol);
         }
     }
 
