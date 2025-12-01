@@ -6,10 +6,7 @@ CampusExpense is an Android application designed to help students track, manage,
 
 ## ⚠️ **Điểm yếu hiện tại của app CampusExpense**
 1. **Layout chưa thực sự thống nhất** → cần xem xét & chỉnh lại các file XML.
-2. Một số text hardcode chưa được chuyển sang đa ngôn ngữ.
-3. Một vài màn hình chưa được tối ưu UI/UX khi dùng hình nhỏ.
-4. Chưa có dark mode.
-5. Chưa có export dữ liệu (CSV/PDF).
+2. Một vài màn hình chưa được tối ưu UI/UX khi dùng hình nhỏ.
 
 ---
 
