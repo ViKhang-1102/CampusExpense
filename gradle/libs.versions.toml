@@ -1,15 +1,14 @@
 [versions]
-agp = "8.13.1"
+agp = "8.5.2"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
-appcompat = "1.7.1"
-material = "1.13.0"
-activity = "1.11.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.9.0"
 constraintlayout = "2.2.1"
-
 room = "2.6.1"
-lifecycle = "2.8.7"
+lifecycle = "2.8.6"
 cardview = "1.0.0"
 
 [libraries]
@@ -20,7 +19,6 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }

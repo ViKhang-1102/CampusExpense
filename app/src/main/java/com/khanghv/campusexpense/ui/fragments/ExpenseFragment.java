@@ -32,13 +32,15 @@ import com.khanghv.campusexpense.ui.expense.ExpenseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
-import java.text.NumberFormat;
+import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import com.khanghv.campusexpense.util.CurrencyManager;
 
 public class ExpenseFragment extends Fragment {
 
@@ -104,7 +106,7 @@ public class ExpenseFragment extends Fragment {
         setupRecyclerView();
 
         fabAdd.setOnClickListener(v -> showAddDialog());
-
+        CurrencyManager.refreshRateIfNeeded(requireContext(), false, null);
         refreshData();
 
         return view;
@@ -201,7 +203,6 @@ public class ExpenseFragment extends Fragment {
         categoryAdapter = new CategoryExpenseAdapter(categoryExpenseList, (categoryId, categoryName) -> {
             showCategoryExpensesDialog(categoryId, categoryName);
         });
-        categoryAdapter.setContext(requireContext());
 
         expenseAdapter = new ExpenseRecyclerAdapter(expenseList, categoryList,
                 expense -> showEditDialog(expense),
@@ -308,8 +309,7 @@ public class ExpenseFragment extends Fragment {
             count = expenseList.size();
         }
 
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        totalExpenseText.setText(currencyFormat.format(totalExpense));
+        totalExpenseText.setText(CurrencyManager.formatDisplayCurrency(requireContext(), totalExpense));
         expenseCountText.setText(String.valueOf(count));
     }
 
@@ -340,7 +340,13 @@ public class ExpenseFragment extends Fragment {
 
         Spinner categorySpinner = dialogView.findViewById(R.id.categorySpinner);
         TextInputEditText amountInput = dialogView.findViewById(R.id.amountInput);
+        TextInputLayout amountLayout = dialogView.findViewById(R.id.amountLayout);
         TextInputEditText descriptionInput = dialogView.findViewById(R.id.descriptionInput);
+        if (amountLayout != null) {
+            String symbol = CurrencyManager.getCurrencySymbol(requireContext());
+            amountLayout.setHint(getString(R.string.amount_with_currency, symbol));
+        }
+
         Button dateButton = dialogView.findViewById(R.id.dateButton);
         Button saveButton = dialogView.findViewById(R.id.saveButton);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
@@ -388,7 +394,8 @@ public class ExpenseFragment extends Fragment {
 
             double amount;
             try {
-                amount = Double.parseDouble(amountStr);
+                double displayAmount = CurrencyManager.parseDisplayAmount(amountStr);
+                amount = CurrencyManager.toBaseCurrency(requireContext(), displayAmount);
                 if (amount <= 0) {
                     Toast.makeText(requireContext(), "Amount must be greater than 0", Toast.LENGTH_SHORT).show();
                     return;
@@ -420,7 +427,13 @@ public class ExpenseFragment extends Fragment {
 
         Spinner categorySpinner = dialogView.findViewById(R.id.categorySpinner);
         TextInputEditText amountInput = dialogView.findViewById(R.id.amountInput);
+        TextInputLayout amountLayout = dialogView.findViewById(R.id.amountLayout);
         TextInputEditText descriptionInput = dialogView.findViewById(R.id.descriptionInput);
+        if (amountLayout != null) {
+            String symbol = CurrencyManager.getCurrencySymbol(requireContext());
+            amountLayout.setHint(getString(R.string.amount_with_currency, symbol));
+        }
+
         Button dateButton = dialogView.findViewById(R.id.dateButton);
         Button saveButton = dialogView.findViewById(R.id.saveButton);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
@@ -447,7 +460,7 @@ public class ExpenseFragment extends Fragment {
         }
         categorySpinner.setEnabled(false);
 
-        amountInput.setText(String.valueOf(expense.getAmount()));
+        amountInput.setText(CurrencyManager.formatEditableValue(requireContext(), expense.getAmount()));
         descriptionInput.setText(expense.getDescription());
 
         Calendar calendar = Calendar.getInstance();
@@ -483,7 +496,8 @@ public class ExpenseFragment extends Fragment {
 
             double amount;
             try {
-                amount = Double.parseDouble(amountStr);
+                double displayAmount = CurrencyManager.parseDisplayAmount(amountStr);
+                amount = CurrencyManager.toBaseCurrency(requireContext(), displayAmount);
                 if (amount <= 0) {
                     Toast.makeText(requireContext(), "Amount must be greater than 0", Toast.LENGTH_SHORT).show();
                     return;
@@ -543,13 +557,12 @@ public class ExpenseFragment extends Fragment {
         }
 
         StringBuilder message = new StringBuilder();
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 
         for (Expense expense : expenses) {
             message.append(dateFormat.format(new Date(expense.getDate())));
             message.append(" - ");
-            message.append(currencyFormat.format(expense.getAmount()));
+            message.append(CurrencyManager.formatDisplayCurrency(requireContext(), expense.getAmount()));
             if (expense.getDescription() != null && !expense.getDescription().trim().isEmpty()) {
                 message.append("\n");
                 message.append(expense.getDescription());

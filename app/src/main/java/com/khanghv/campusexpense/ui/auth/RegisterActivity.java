@@ -5,24 +5,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.khanghv.campusexpense.MainActivity;
 import com.khanghv.campusexpense.R;
+import com.khanghv.campusexpense.base.BaseActivity;
 import com.khanghv.campusexpense.data.database.AppDatabase;
 import com.khanghv.campusexpense.data.database.UserDao;
 import com.khanghv.campusexpense.data.model.User;
 
 import java.security.MessageDigest;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 
     private TextView loginText;
 

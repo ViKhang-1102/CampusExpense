@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.model.Expense;
 import com.khanghv.campusexpense.data.model.Category;
-import java.text.NumberFormat;
+import com.khanghv.campusexpense.util.CurrencyManager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,7 +87,7 @@ public class ExpenseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             String dateHeader;
 
             if (expenseDate.equals(today)) {
-                dateHeader = context != null ? "": "Today";
+                dateHeader = context != null ? context.getString(R.string.today) : "Today";
             } else {
                 dateHeader = dateFormat.format(new Date(expense.getDate()));
             }
@@ -132,12 +132,11 @@ public class ExpenseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         } else {
             ExpenseViewHolder expenseHolder = (ExpenseViewHolder) holder;
             Expense expense = item.expense;
-            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
             String categoryName = getCategoryName(expense.getCategoryId());
             expenseHolder.categoryNameText.setText(categoryName);
-            expenseHolder.amountText.setText(currencyFormat.format(expense.getAmount()));
+            expenseHolder.amountText.setText(CurrencyManager.formatDisplayCurrency(context, expense.getAmount()));
             expenseHolder.timeText.setText(timeFormat.format(new Date(expense.getDate())));
 
             if (expense.getDescription() != null && !expense.getDescription().trim().isEmpty()) {

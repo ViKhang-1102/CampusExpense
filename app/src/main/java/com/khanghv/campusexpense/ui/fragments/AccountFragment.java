@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import com.khanghv.campusexpense.MainActivity;
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.ui.auth.LoginActivity;
+import com.khanghv.campusexpense.util.CurrencyManager;
+import com.khanghv.campusexpense.util.LocaleManager;
 
 public class AccountFragment extends Fragment {
 
@@ -23,6 +26,7 @@ public class AccountFragment extends Fragment {
     private TextView avatarText;
     private Button categoryButton;
     private Button logoutButton;
+    private Button languageButton;
     private SharedPreferences sharedPreferences;
 
     @Nullable
@@ -35,6 +39,7 @@ public class AccountFragment extends Fragment {
         usernameText = view.findViewById(R.id.usernameText);
         avatarText = view.findViewById(R.id.avatarText);
         categoryButton = view.findViewById(R.id.categoryButton);
+        languageButton = view.findViewById(R.id.languageButton);
         logoutButton = view.findViewById(R.id.logoutButton);
         sharedPreferences = getActivity().getSharedPreferences("user_prefs", 0);
 
@@ -54,6 +59,7 @@ public class AccountFragment extends Fragment {
         });
 
         logoutButton.setOnClickListener(v -> logout());
+        setupLanguageButton();
         return view;
     }
 
@@ -65,5 +71,41 @@ public class AccountFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().finish();
+    }
+
+    private void setupLanguageButton() {
+        if (languageButton == null) {
+            return;
+        }
+        updateLanguageButtonText();
+        languageButton.setOnClickListener(v -> {
+            LocaleManager.Language nextLanguage = LocaleManager.toggleLanguage(requireContext());
+            CurrencyManager.CurrencyType nextCurrency =
+                    nextLanguage == LocaleManager.Language.EN ?
+                            CurrencyManager.CurrencyType.USD :
+                            CurrencyManager.CurrencyType.VND;
+            CurrencyManager.setDisplayCurrency(requireContext(), nextCurrency);
+            Toast.makeText(requireContext(), R.string.currency_rate_updating, Toast.LENGTH_SHORT).show();
+            CurrencyManager.refreshRateIfNeeded(requireContext(), true, new CurrencyManager.RateUpdateListener() {
+                @Override
+                public void onSuccess(double rate) {
+                    requireActivity().recreate();
+                }
+
+                @Override
+                public void onError(Exception exception) {
+                    Toast.makeText(requireContext(), R.string.currency_rate_failed, Toast.LENGTH_SHORT).show();
+                    requireActivity().recreate();
+                }
+            });
+        });
+    }
+
+    private void updateLanguageButtonText() {
+        LocaleManager.Language language = LocaleManager.getLanguage(requireContext());
+        int textRes = language == LocaleManager.Language.VI ?
+                R.string.switch_to_english :
+                R.string.switch_to_vietnamese;
+        languageButton.setText(textRes);
     }
 }

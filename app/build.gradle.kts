@@ -34,7 +34,9 @@ android {
 dependencies {
 
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+
+//    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation(libs.appcompat)
     implementation(libs.material)

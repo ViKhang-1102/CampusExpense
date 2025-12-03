@@ -1,5 +1,6 @@
 package com.khanghv.campusexpense.ui.budget;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.model.Budget;
+import com.khanghv.campusexpense.util.CurrencyManager;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class BudgetRecyclerAdapter extends RecyclerView.Adapter<BudgetRecyclerAdapter.ViewHolder> {
     private List<Budget> budgetsList;
     private List<String> categoryNames;
     private onEditClickListener onEditClickListener;
     private onDeleteClickListener onDeleteClickListener;
+    private Context context;
 
     public interface onEditClickListener {
         void onEditClick(Budget budget);
@@ -65,6 +66,9 @@ public class BudgetRecyclerAdapter extends RecyclerView.Adapter<BudgetRecyclerAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (context == null) {
+            context = parent.getContext();
+        }
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_budget_card, parent, false);
         return new ViewHolder(view);
@@ -74,18 +78,16 @@ public class BudgetRecyclerAdapter extends RecyclerView.Adapter<BudgetRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Budget budget = budgetsList.get(position);
-//        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US); // $
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault()); // vnd
         String categoryName = (position < categoryNames.size()) ? categoryNames.get(position) : "Unknown Category";
         holder.categoryNameText.setText(categoryName);
-        holder.amountText.setText(currencyFormat.format(budget.getAmount())); // vnd
+        holder.amountText.setText(CurrencyManager.formatDisplayCurrency(context, budget.getAmount()));
         holder.periodText.setText(budget.getPeriod());
         double spent = 0.0;
         double percentage = budget.getAmount() > 0 ? spent / budget.getAmount() * 100 : 0;
         int progress = (int) Math.min(Math.max(percentage, 0), 100);
         holder.progressBar.setProgress(progress);
         holder.periodText.setText(budget.getPeriod());
-        holder.progressText.setText(String.format(Locale.getDefault(), "%.0f%% used", percentage));
+        holder.progressText.setText(context.getString(R.string.budget_percentage_used, percentage));
         holder.editButton.setOnClickListener(v -> onEditClickListener.onEditClick(budget));
         holder.deleteButton.setOnClickListener(v -> onDeleteClickListener.onDeleteClick(budget));
     }

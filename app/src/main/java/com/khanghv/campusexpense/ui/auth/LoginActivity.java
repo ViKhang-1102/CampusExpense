@@ -7,19 +7,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.khanghv.campusexpense.MainActivity;
 import com.khanghv.campusexpense.R;
+import com.khanghv.campusexpense.base.BaseActivity;
 import com.khanghv.campusexpense.data.database.AppDatabase;
 import com.khanghv.campusexpense.data.database.UserDao;
 import com.khanghv.campusexpense.data.model.User;
 
 import java.security.MessageDigest;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private TextInputLayout usernameLayout;
     private TextInputLayout passwordLayout;

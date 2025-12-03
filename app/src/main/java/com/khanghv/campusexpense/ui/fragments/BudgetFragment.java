@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.database.AppDatabase;
 import com.khanghv.campusexpense.data.database.BudgetDao;
@@ -28,6 +29,7 @@ import com.khanghv.campusexpense.data.database.CategoryDao;
 import com.khanghv.campusexpense.data.model.Budget;
 import com.khanghv.campusexpense.data.model.Category;
 import com.khanghv.campusexpense.ui.budget.BudgetRecyclerAdapter;
+import com.khanghv.campusexpense.util.CurrencyManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +68,7 @@ public class BudgetFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
         fabAdd.setOnClickListener(v -> showAddBudgetDialog());
+        CurrencyManager.refreshRateIfNeeded(requireContext(), false, null);
         refreshBudgetList();
         return view;
     }
@@ -113,9 +116,15 @@ public class BudgetFragment extends Fragment {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_budget, null);
         Spinner categorySpinner = dialogView.findViewById(R.id.categorySpinner);
         TextInputEditText amountInput = dialogView.findViewById(R.id.amountInput);
+        TextInputLayout amountLayout = dialogView.findViewById(R.id.amountLayout);
         Spinner periodSpinner = dialogView.findViewById(R.id.periodSpinner);
         Button saveButton = dialogView.findViewById(R.id.saveButton);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
+
+        if (amountLayout != null) {
+            String symbol = CurrencyManager.getCurrencySymbol(requireContext());
+            amountLayout.setHint(getString(R.string.amount_with_currency, symbol));
+        }
 
         List<String> categoryNameList = new ArrayList<>();
         for (Category cat : categoryList) {
@@ -138,7 +147,8 @@ public class BudgetFragment extends Fragment {
             int categoryPosition = categorySpinner.getSelectedItemPosition();
             String amountStr = amountInput.getText().toString().trim();
             int periodPosition = periodSpinner.getSelectedItemPosition();
-            double amount = Double.parseDouble(amountStr);
+            double displayAmount = CurrencyManager.parseDisplayAmount(amountStr);
+            double amount = CurrencyManager.toBaseCurrency(requireContext(), displayAmount);
             Category selectedCategory = categoryList.get(categoryPosition);
             String period = periods[periodPosition];
             Budget existingBudget = budgetDao.getBudgetByCategoryAndUser(currentUserId, selectedCategory.getId());
@@ -165,9 +175,15 @@ public class BudgetFragment extends Fragment {
 
         Spinner categorySpinner = dialogView.findViewById(R.id.categorySpinner);
         TextInputEditText amountInput = dialogView.findViewById(R.id.amountInput);
+        TextInputLayout amountLayout = dialogView.findViewById(R.id.amountLayout);
         Spinner periodSpinner = dialogView.findViewById(R.id.periodSpinner);
         Button saveButton = dialogView.findViewById(R.id.saveButton);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
+
+        if (amountLayout != null) {
+            String symbol = CurrencyManager.getCurrencySymbol(requireContext());
+            amountLayout.setHint(getString(R.string.amount_with_currency, symbol));
+        }
 
         List<String> categoryNameList = new ArrayList<>();
         for (Category cat : categoryList) {
@@ -188,7 +204,7 @@ public class BudgetFragment extends Fragment {
         }
         categorySpinner.setEnabled(false);
 
-        amountInput.setText(String.valueOf(budget.getAmount()));
+        amountInput.setText(CurrencyManager.formatEditableValue(requireContext(), budget.getAmount()));
 
         String[] periods = {"Monthly", "Weekly"};
         ArrayAdapter<String> periodAdapter = new ArrayAdapter<>(requireContext(),
@@ -226,7 +242,8 @@ public class BudgetFragment extends Fragment {
 
             double amount;
             try {
-                amount = Double.parseDouble(amountStr);
+                double displayAmount = CurrencyManager.parseDisplayAmount(amountStr);
+                amount = CurrencyManager.toBaseCurrency(requireContext(), displayAmount);
                 if (amount <= 0) {
                     Toast.makeText(requireContext(), "Amount must be greater than 0", Toast.LENGTH_SHORT).show();
                     return;

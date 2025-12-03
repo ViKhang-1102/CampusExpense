@@ -11,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.model.Budget;
-import java.text.NumberFormat;
+import com.khanghv.campusexpense.util.CurrencyManager;
 import java.util.List;
-import java.util.Locale;
 
 
 public class CategoryExpenseAdapter extends RecyclerView.Adapter<CategoryExpenseAdapter.ViewHolder> {
 
     private List<CategoryExpenseItem> categoryExpenseList;
     private OnCategoryClickListener onCategoryClickListener;
-    private Context context;
 
     public interface OnCategoryClickListener {
         void onCategoryClick(int categoryId, String categoryName);
@@ -47,9 +45,6 @@ public class CategoryExpenseAdapter extends RecyclerView.Adapter<CategoryExpense
         this.onCategoryClickListener = onCategoryClickListener;
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
 
     @NonNull
     @Override
@@ -62,17 +57,16 @@ public class CategoryExpenseAdapter extends RecyclerView.Adapter<CategoryExpense
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryExpenseItem item = categoryExpenseList.get(position);
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        Context holderContext = holder.itemView.getContext();
 
         holder.categoryNameText.setText(item.categoryName);
-        holder.expenseAmountText.setText(currencyFormat.format(item.totalExpense));
-        String transactionText = context != null ?
-                context.getString(R.string.transactions) : "transactions";
+        holder.expenseAmountText.setText(CurrencyManager.formatDisplayCurrency(holderContext, item.totalExpense));
+        String transactionText = holderContext.getString(R.string.transactions);
         holder.expenseCountText.setText(item.expenseCount + " " + transactionText);
 
         if (item.budget != null) {
             holder.budgetLayout.setVisibility(View.VISIBLE);
-            holder.budgetAmountText.setText(currencyFormat.format(item.budget.getAmount()));
+            holder.budgetAmountText.setText(CurrencyManager.formatDisplayCurrency(holderContext, item.budget.getAmount()));
 
             double percentage = (item.totalExpense / item.budget.getAmount()) * 100;
             int progress = (int) Math.min(Math.max(percentage, 0), 100);
@@ -80,14 +74,12 @@ public class CategoryExpenseAdapter extends RecyclerView.Adapter<CategoryExpense
 
             if (percentage > 100) {
                 holder.progressBar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFFD32F2F));
-                String overText = context != null ?
-                        context.getString(R.string.over_budget, percentage - 100) :
-                        String.format(Locale.getDefault(), "Over %.0f%%", percentage - 100);
+                String overText = holderContext.getString(R.string.over_budget, percentage - 100);
                 holder.progressText.setText(overText);
                 holder.progressText.setTextColor(0xFFD32F2F);
             } else {
                 holder.progressBar.setProgressTintList(android.content.res.ColorStateList.valueOf(percentage > 80 ? 0xFFFF9800 : 0xFF4CAF50));
-                holder.progressText.setText(String.format(Locale.getDefault(), "%.0f%%", percentage));
+                holder.progressText.setText(holderContext.getString(R.string.budget_percentage_used, percentage));
                 holder.progressText.setTextColor(0xFF757575);
             }
         } else {
