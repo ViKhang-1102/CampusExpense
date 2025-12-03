@@ -7,15 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat; // Đảm bảo đã import
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +20,8 @@ import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.ExpenseRepository;
 import com.khanghv.campusexpense.data.model.User;
 import com.khanghv.campusexpense.ui.home.BudgetBreakdownAdapter;
+import com.khanghv.campusexpense.util.CurrencyManager;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +37,6 @@ public class HomeFragment extends Fragment {
     private ExpenseRepository repository;
     private int currentUserId;
     private String currentMonthYear;
-    private final DecimalFormat currencyFormat = new DecimalFormat("#,###");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,6 +76,9 @@ public class HomeFragment extends Fragment {
         currentUserId = getCurrentUserId();
         currentMonthYear = getCurrentMonthYear();
 
+        // Làm tươi tỷ giá nếu cần (không ép buộc, dùng cache nếu còn hạn)
+        CurrencyManager.refreshRateIfNeeded(requireContext(), false, null);
+
         // Kiểm tra userId hợp lệ
         if (currentUserId == -1) {
             tvGreeting.setText(getString(R.string.greeting, "User"));
@@ -108,8 +107,7 @@ public class HomeFragment extends Fragment {
         repository.getTotalSpentForMonth(monthYear, userId).observe(getViewLifecycleOwner(), totalSpent -> {
             if (totalSpent == null) totalSpent = 0.0;
             totalSpentValue[0] = totalSpent;
-            String currencySymbol = getString(R.string.currency_symbol);
-            String formatted = currencyFormat.format(totalSpent) + " " + currencySymbol;
+            String formatted = CurrencyManager.formatDisplayCurrency(requireContext(), totalSpent);
             tvTotalSpent.setText(formatted);
             tvSpent.setText(formatted);
             // Cập nhật với budget hiện tại
@@ -129,8 +127,7 @@ public class HomeFragment extends Fragment {
                 totalBudget = 0.0;
             }
             budgetValue[0] = totalBudget;
-            String currencySymbol = getString(R.string.currency_symbol);
-            String formatted = currencyFormat.format(totalBudget) + " " + currencySymbol;
+            String formatted = CurrencyManager.formatDisplayCurrency(requireContext(), totalBudget);
             tvBudget.setText(formatted);
             tvTotalBudget.setText(formatted);
             // Cập nhật với spent hiện tại
@@ -147,8 +144,7 @@ public class HomeFragment extends Fragment {
 
     private void updateSummaryAndBreakdown(double budget, double spent) {
         double remaining = budget - spent;
-        String currencySymbol = getString(R.string.currency_symbol);
-        String remainingText = (remaining < 0 ? "-" : "") + currencyFormat.format(Math.abs(remaining)) + " " + currencySymbol;
+        String remainingText = CurrencyManager.formatDisplayCurrency(requireContext(), remaining);
         tvRemaining.setText(remainingText);
 
         int colorRes = remaining < 0 ? android.R.color.holo_red_dark : android.R.color.holo_green_dark;
@@ -159,8 +155,7 @@ public class HomeFragment extends Fragment {
         int daysInMonth = getDaysInMonth(currentMonthYear);
         if (daysInMonth > 0) {
             double avgDaily = totalSpent / daysInMonth;
-            String currencySymbol = getString(R.string.currency_symbol);
-            tvAvgPerDay.setText(currencyFormat.format(avgDaily) + " " + currencySymbol);
+            tvAvgPerDay.setText(CurrencyManager.formatDisplayCurrency(requireContext(), avgDaily));
         }
     }
 

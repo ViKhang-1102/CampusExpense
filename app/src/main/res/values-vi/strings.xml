@@ -96,7 +96,7 @@
     <string name="spent_label">Đã chi</string>
     <string name="remaining_label">Còn lại</string>
     <string name="change_language">Chuyển đổi ngôn ngữ</string>
-    <string name="switch_to_english">Chuyển sang English (USD)</string>
+    <string name="switch_to_english">Chuyển sang English ($)</string>
     <string name="switch_to_vietnamese">Chuyển sang Tiếng Việt (₫)</string>
     <string name="currency_rate_updating">Đang cập nhật tỷ giá...</string>
     <string name="currency_rate_failed">Không thể cập nhật tỷ giá, sử dụng tỷ giá cũ.</string>

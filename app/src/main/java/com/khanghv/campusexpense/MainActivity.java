@@ -22,6 +22,8 @@ public class MainActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
     private BottomNavigationView bottomNavigation;
+    private static final String SETTINGS_PREFS = "settings_prefs";
+    private static final String KEY_RESET_HOME_AFTER_RECREATE = "reset_to_home_after_recreate";
     private boolean isLoggedIn() {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
@@ -64,10 +66,20 @@ public class MainActivity extends BaseActivity {
             return true;
         });
 
+        // Luôn đặt tab Home làm mặc định sau khi Activity khởi tạo / recreate
+        bottomNavigation.setSelectedItemId(R.id.nav_home);
+    }
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
-                .commit();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Nếu vừa đổi ngôn ngữ từ AccountFragment, ép bottom nav về Home
+        SharedPreferences settingsPrefs = getSharedPreferences(SETTINGS_PREFS, MODE_PRIVATE);
+        boolean shouldResetHome = settingsPrefs.getBoolean(KEY_RESET_HOME_AFTER_RECREATE, false);
+        if (shouldResetHome && bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(R.id.nav_home);
+            settingsPrefs.edit().putBoolean(KEY_RESET_HOME_AFTER_RECREATE, false).apply();
+        }
     }
 
     public void navigateToCategoriesFragment() {

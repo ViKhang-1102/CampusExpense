@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khanghv.campusexpense.R;
 import com.khanghv.campusexpense.data.ExpenseRepository;
+import com.khanghv.campusexpense.util.CurrencyManager;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class BudgetBreakdownAdapter extends RecyclerView.Adapter<BudgetBreakdownAdapter.ViewHolder> {
     private List<ExpenseRepository.BudgetBreakdownItem> breakdownList;
-    private final DecimalFormat currencyFormat = new DecimalFormat("#,###");
 
     public BudgetBreakdownAdapter(List<ExpenseRepository.BudgetBreakdownItem> breakdownList) {
         this.breakdownList = breakdownList;
@@ -45,9 +44,8 @@ public class BudgetBreakdownAdapter extends RecyclerView.Adapter<BudgetBreakdown
         holder.tvPercentage.setText(percentText);
         holder.progressBar.setProgress(Math.min(item.percentage, 100));
         
-        String currencySymbol = holder.itemView.getContext().getString(R.string.currency_symbol);
-        holder.tvSpent.setText(currencyFormat.format(item.spentAmount) + " " + currencySymbol);
-        holder.tvBudget.setText(currencyFormat.format(item.budgetAmount) + " " + currencySymbol);
+        holder.tvSpent.setText(CurrencyManager.formatDisplayCurrency(holder.itemView.getContext(), item.spentAmount));
+        holder.tvBudget.setText(CurrencyManager.formatDisplayCurrency(holder.itemView.getContext(), item.budgetAmount));
     }
 
     @Override

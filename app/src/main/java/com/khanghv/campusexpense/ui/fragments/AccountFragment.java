@@ -85,6 +85,9 @@ public class AccountFragment extends Fragment {
                             CurrencyManager.CurrencyType.USD :
                             CurrencyManager.CurrencyType.VND;
             CurrencyManager.setDisplayCurrency(requireContext(), nextCurrency);
+            // Đánh dấu để MainActivity biết cần reset về Home sau khi recreate
+            SharedPreferences settingsPrefs = requireContext().getSharedPreferences("settings_prefs", 0);
+            settingsPrefs.edit().putBoolean("reset_to_home_after_recreate", true).apply();
             Toast.makeText(requireContext(), R.string.currency_rate_updating, Toast.LENGTH_SHORT).show();
             CurrencyManager.refreshRateIfNeeded(requireContext(), true, new CurrencyManager.RateUpdateListener() {
                 @Override

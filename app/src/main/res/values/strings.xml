@@ -108,7 +108,7 @@
     <string name="spent_label">Spent</string>
     <string name="remaining_label">Remaining</string>
     <string name="change_language">CHANGE LANGUAGE</string>
-    <string name="switch_to_english">Switch to English (USD)</string>
+    <string name="switch_to_english">Switch to English ($)</string>
     <string name="switch_to_vietnamese">Switch to Vietnamese (₫)</string>
     <string name="currency_rate_updating">Updating exchange rate…</string>
     <string name="currency_rate_failed">Could not refresh exchange rate. Using last known rate.</string>
