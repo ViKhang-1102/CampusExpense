@@ -1,4 +1,4 @@
-# 🎓🎓 **CampusExpense – Student Expense Management App** 🎓🎓
+# 🎓🎓🎓 **CampusExpense – Student Expense Management App** 🎓🎓🎓
 
 CampusExpense is an Android application designed to help students track, manage, and control their daily expenses while living and studying on campus. The app encourages healthier financial habits, reduces unnecessary spending, and supports students in managing their money more effectively.
 
