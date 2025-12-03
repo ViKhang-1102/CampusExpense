@@ -4,12 +4,6 @@ CampusExpense is an Android application designed to help students track, manage,
 
 ---
 
-## ⚠️ **Điểm yếu hiện tại của app CampusExpense**
-1. **Layout chưa thực sự thống nhất** → cần xem xét & chỉnh lại các file XML.
-2. Một vài màn hình chưa được tối ưu UI/UX khi dùng hình nhỏ.
-
----
-
 ## 🎯 **1. Project Purpose**
 
 - Allow students to record daily expenses such as food, transportation, study materials, utilities, and entertainment.  
@@ -72,5 +66,14 @@ CampusExpense is an Android application designed to help students track, manage,
 - Become more aware of spending habits  
 - Reduce unnecessary expenses  
 - Maintain a healthier budget  
-- Build long-term saving habits  
+- Build long-term saving habits
+
+---
+
+## ⚠️ **Errors encountered when building the CampusExpense application**
+1. **Inconsistent layout across screens** → the UI is not uniform and requires a full review of XML layouts.
+2. Multilingual support not working → switching between English and Vietnamese does not function correctly, especially for currency formatting.
+3. Exchange rate not updating → the conversion between USD and VND does not fetch or display real-time values.
+4. Library version conflicts → dependency version mismatches cause build errors or unexpected crashes.
+
 
