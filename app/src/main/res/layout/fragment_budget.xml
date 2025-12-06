@@ -20,17 +20,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/budget_management"
-                android:textSize="28sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_dark_text"
-                android:layout_marginBottom="8dp" />
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="8dp"
+                android:letterSpacing="0.01" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/budget_subtitle"
-                android:textSize="14sp"
-                android:textColor="@color/color_muted"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary"
                 android:layout_marginBottom="24dp" />
 
             <TextView
@@ -60,9 +61,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="20dp"
         android:src="@android:drawable/ic_input_add"
         app:tint="@color/white"
-        app:backgroundTint="@color/color_budget_primary" />
+        app:backgroundTint="@color/primary"
+        app:elevation="6dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

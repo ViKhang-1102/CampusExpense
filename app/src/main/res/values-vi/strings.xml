@@ -102,5 +102,6 @@
     <string name="currency_rate_failed">Không thể cập nhật tỷ giá, sử dụng tỷ giá cũ.</string>
     <string name="amount_with_currency">Số tiền (%1$s)</string>
     <string name="budget_percentage_used">Đã dùng %1$.0f%%</string>
+    <string name="transaction">Số giao dịch</string>
 
 </resources>

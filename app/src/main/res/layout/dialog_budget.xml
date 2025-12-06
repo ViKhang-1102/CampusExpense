@@ -10,9 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/category"
-        android:textSize="14sp"
-        android:textColor="@color/color_budget_primary"
-        android:layout_marginBottom="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
 
     <Spinner
         android:id="@+id/categorySpinner"
@@ -26,10 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amount"
-        app:hintTextColor="@color/color_budget_primary"
-        app:boxStrokeColor="@color/color_budget_primary"
+        app:hintTextColor="@color/primary"
+        app:boxStrokeColor="@color/primary"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
         android:layout_marginBottom="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/amountInput"
@@ -44,9 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period"
-        android:textSize="14sp"
-        android:textColor="@color/color_budget_primary"
-        android:layout_marginBottom="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
 
     <Spinner
         android:id="@+id/periodSpinner"
@@ -66,17 +72,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:textColor="@color/color_muted"
+            android:textColor="@color/text_secondary"
             app:backgroundTint="@android:color/transparent"
-            android:layout_marginEnd="8dp"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            android:layout_marginEnd="12dp"
+            android:minHeight="48dp"
+            style="@style/Widget.Material3.Button.TextButton" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            app:backgroundTint="@color/color_budget_primary" />
+            app:backgroundTint="@color/primary"
+            android:minHeight="48dp"
+            app:cornerRadius="12dp" />
 
     </LinearLayout>
 

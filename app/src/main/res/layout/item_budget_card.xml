@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="2dp"
     app:strokeWidth="0dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/surface">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,19 +29,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_dark_text" />
+                android:textColor="@color/text_primary"
+                android:letterSpacing="0.01" />
 
             <TextView
                 android:id="@+id/periodText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/color_muted"
-                android:background="@color/color_gray_e0"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:background="@drawable/bg_rounded_chip"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
                 android:layout_marginEnd="8dp" />
 
             <ImageButton
@@ -74,16 +77,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/budget_label"
-                android:textSize="14sp"
-                android:textColor="@color/color_muted" />
+                android:textSize="15sp"
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/amountText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_dark_text" />
+                android:textColor="@color/text_primary"
+                android:letterSpacing="0.01" />
 
         </LinearLayout>
 
@@ -91,20 +95,21 @@
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="10dp"
             android:max="100"
             android:progress="0"
-            android:progressTint="@color/color_success_legacy"
-            android:progressBackgroundTint="@color/color_gray_e0" />
+            android:progressTint="@color/success"
+            android:progressBackgroundTint="@color/divider"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/progressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@color/color_muted" />
+            android:layout_marginTop="6dp"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 
