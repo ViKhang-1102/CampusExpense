@@ -34,4 +34,7 @@ public interface BudgetDao {
     @Query("SELECT * FROM budgets WHERE id = :id")
     Budget getBudgetById(int id);
 
+    @Query("DELETE FROM budgets WHERE categoryId = :categoryId")
+    void deleteBudgetsByCategoryId(int categoryId);
+
 }

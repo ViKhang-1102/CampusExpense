@@ -22,6 +22,8 @@ import com.khanghv.campusexpense.data.database.AppDatabase;
 import com.khanghv.campusexpense.data.model.Category;
 import com.khanghv.campusexpense.ui.category.CategoryRecyclerAdapter;
 import com.khanghv.campusexpense.data.database.CategoryDao;
+import com.khanghv.campusexpense.data.database.ExpenseDao;
+import com.khanghv.campusexpense.data.database.BudgetDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,8 @@ public class CategoryFragment extends Fragment {
     private CategoryRecyclerAdapter adapter;
     private List<Category> categoriesList;
     private CategoryDao categoryDao;
+    private ExpenseDao expenseDao;
+    private BudgetDao budgetDao;
     private TextView emptyView;
 
     @Nullable
@@ -44,6 +48,8 @@ public class CategoryFragment extends Fragment {
         emptyView = view.findViewById(R.id.emptyView);
         AppDatabase db = AppDatabase.getInstance(requireContext());
         categoryDao = db.categoryDao();
+        expenseDao = db.expenseDao();
+        budgetDao = db.budgetDao();
 
         categoriesList = new ArrayList<>();
         adapter = new CategoryRecyclerAdapter(
@@ -105,6 +111,10 @@ public class CategoryFragment extends Fragment {
                 .setTitle(getString(R.string.delete_category))
                 .setMessage(getString(R.string.confirm_delete_category))
                 .setPositiveButton(getString(R.string.delete), (dialog, which) -> {
+                    // Xóa tất cả expenses và budgets liên quan đến category này trước
+                    expenseDao.deleteExpensesByCategoryId(category.getId());
+                    budgetDao.deleteBudgetsByCategoryId(category.getId());
+                    // Sau đó mới xóa category
                     categoryDao.delete(category);
                     refreshList();
                     Toast.makeText(requireContext(), getString(R.string.category_deleted),

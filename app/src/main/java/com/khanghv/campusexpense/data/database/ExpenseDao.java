@@ -50,4 +50,7 @@ public interface ExpenseDao {
 
     @Query("SELECT COUNT(*) FROM expenses WHERE userId = :userId AND date >= :startDate AND date <= :endDate")
     LiveData<Integer> getTransactionCountForMonth(long startDate, long endDate, int userId);
+
+    @Query("DELETE FROM expenses WHERE categoryId = :categoryId")
+    void deleteExpensesByCategoryId(int categoryId);
 }
