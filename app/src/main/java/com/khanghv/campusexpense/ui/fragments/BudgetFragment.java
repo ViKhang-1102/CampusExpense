@@ -106,7 +106,7 @@ public class BudgetFragment extends Fragment {
 
     private void showAddBudgetDialog() {
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
 
         if (categoryList.isEmpty()) {
             Toast.makeText(requireContext(), "Please add categories first", Toast.LENGTH_SHORT).show();
@@ -168,7 +168,7 @@ public class BudgetFragment extends Fragment {
 
     private void showEditDialog(Budget budget) {
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_budget, null);
@@ -197,7 +197,13 @@ public class BudgetFragment extends Fragment {
 
         Category category = categoryDao.getById(budget.getCategoryId());
         if (category != null) {
-            int categoryIndex = categoryList.indexOf(category);
+            int categoryIndex = -1;
+            for (int i = 0; i < categoryList.size(); i++) {
+                if (categoryList.get(i).getId() == budget.getCategoryId()) {
+                    categoryIndex = i;
+                    break;
+                }
+            }
             if (categoryIndex >= 0) {
                 categorySpinner.setSelection(categoryIndex);
             }

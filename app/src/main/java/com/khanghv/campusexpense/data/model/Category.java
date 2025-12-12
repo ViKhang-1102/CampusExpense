@@ -8,9 +8,11 @@ public class Category {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
+    private int userId;
 
     public Category() {}
-    public Category (String name) {
+    public Category (int userId, String name) {
+        this.userId = userId;
         this.name = name;
     }
     public int getId() {
@@ -24,5 +26,11 @@ public class Category {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

@@ -15,6 +15,8 @@ import com.khanghv.campusexpense.data.database.UserDao;
 import com.khanghv.campusexpense.data.model.User;
 
 import java.security.MessageDigest;
+import android.content.Intent;
+import android.content.SharedPreferences;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -30,6 +32,7 @@ public class RegisterActivity extends BaseActivity {
 
     private Button btnRegister;
     private UserDao userDao;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class RegisterActivity extends BaseActivity {
 
         AppDatabase database = AppDatabase.getInstance(this);
         userDao = database.userDao();
+        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
 
         btnRegister.setOnClickListener(v -> register());
     }
@@ -114,11 +118,31 @@ public class RegisterActivity extends BaseActivity {
             User user = new User(username, hashedPassword);
             long result = userDao.insertUser(user);
 
+            // If inserted successfully, fetch the inserted user to get assigned id
+            User insertedUser = null;
+            if (result > 0) {
+                insertedUser = userDao.getUserByUsername(username);
+            }
+
+            User finalInsertedUser = insertedUser;
             runOnUiThread(() -> {
                 btnRegister.setEnabled(true);
                 btnRegister.setText(R.string.register);
-                if (result > 0) {
+                if (result > 0 && finalInsertedUser != null) {
+                    // Save session for the newly created user so app uses correct data
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    // Clear any previous session data to avoid mixing users
+                    editor.clear();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putInt("userId", finalInsertedUser.getId());
+                    editor.putString("username", finalInsertedUser.getUsername());
+                    editor.apply();
+
                     Toast.makeText(RegisterActivity.this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+                    // Navigate to MainActivity as the new user
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(RegisterActivity.this, getString(R.string.register_failed), Toast.LENGTH_SHORT).show();

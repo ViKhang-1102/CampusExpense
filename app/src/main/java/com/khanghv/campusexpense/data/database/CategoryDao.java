@@ -21,8 +21,8 @@ public interface CategoryDao {
     @Delete
     void delete(Category category);
 
-    @Query("SELECT * FROM categories ORDER BY name ASC")
-    List<Category> getAll();
+    @Query("SELECT * FROM categories WHERE userId = :userId ORDER BY name ASC")
+    List<Category> getAllByUser(int userId);
 
     @Query("SELECT * FROM categories WHERE id = :id LIMIT 1")
     Category getById(int id);

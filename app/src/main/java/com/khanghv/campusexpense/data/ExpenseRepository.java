@@ -128,7 +128,7 @@ public class ExpenseRepository {
                 }
                 
                 // Lấy tất cả categories một lần
-                List<Category> allCategories = categoryDao.getAll();
+                List<Category> allCategories = categoryDao.getAllByUser(userId);
                 java.util.Map<Integer, String> categoryMap = new java.util.HashMap<>();
                 for (Category cat : allCategories) {
                     categoryMap.put(cat.getId(), cat.getName());

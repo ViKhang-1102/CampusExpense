@@ -37,6 +37,8 @@ public class CategoryFragment extends Fragment {
     private ExpenseDao expenseDao;
     private BudgetDao budgetDao;
     private TextView emptyView;
+    private android.content.SharedPreferences sharedPreferences;
+    private int currentUserId;
 
     @Nullable
     @Override
@@ -50,6 +52,8 @@ public class CategoryFragment extends Fragment {
         categoryDao = db.categoryDao();
         expenseDao = db.expenseDao();
         budgetDao = db.budgetDao();
+        sharedPreferences = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE);
+        currentUserId = sharedPreferences.getInt("userId", -1);
 
         categoriesList = new ArrayList<>();
         adapter = new CategoryRecyclerAdapter(
@@ -82,7 +86,7 @@ public class CategoryFragment extends Fragment {
                 Toast.makeText(requireContext(), getString(R.string.error_empty_category_name), Toast.LENGTH_SHORT).show();
                 return;
             }
-            Category category = new Category(name);
+            Category category = new Category(currentUserId, name);
             categoryDao.insert(category);
             refreshList();
             dialog.dismiss();
@@ -94,7 +98,7 @@ public class CategoryFragment extends Fragment {
 
     private void refreshList(){
         categoriesList.clear();
-        categoriesList.addAll(categoryDao.getAll());
+        categoriesList.addAll(categoryDao.getAllByUser(currentUserId));
         adapter.notifyDataSetChanged();
 
         if (categoriesList.isEmpty()){

@@ -172,7 +172,7 @@ public class ExpenseFragment extends Fragment {
         List<String> categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.all_categories));
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
         for (Category cat : categoryList) {
             categoryNames.add(cat.getName());
         }
@@ -229,7 +229,7 @@ public class ExpenseFragment extends Fragment {
 
     private void refreshCategoryData(long startDate, long endDate) {
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
 
         categoryExpenseList.clear();
 
@@ -281,7 +281,7 @@ public class ExpenseFragment extends Fragment {
         }
 
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
         expenseAdapter.setCategoryList(categoryList);
 
         recyclerView.setAdapter(expenseAdapter);
@@ -328,7 +328,7 @@ public class ExpenseFragment extends Fragment {
 
     private void showAddDialog() {
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
 
         if (categoryList.isEmpty()) {
             Toast.makeText(requireContext(), "Please add categories first", Toast.LENGTH_SHORT).show();
@@ -420,7 +420,7 @@ public class ExpenseFragment extends Fragment {
 
     private void showEditDialog(Expense expense) {
         categoryList.clear();
-        categoryList.addAll(categoryDao.getAll());
+        categoryList.addAll(categoryDao.getAllByUser(currentUserId));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_expense, null);
